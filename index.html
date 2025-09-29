@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Kitty Brasil - Mundo Supercute</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #FFB6C1, #FFE4E1, #FFF0F5);
+            overflow-x: hidden;
+        }
+        
+        /* Animações fofinhas */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 60%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            80% { transform: translateY(-5px); }
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(45deg, #FF69B4, #FF1493, #DC143C);
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.1) 10px,
+                rgba(255, 255, 255, 0.1) 20px
+            );
+            animation: sparkle 3s ease-in-out infinite;
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .nav-menu a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(135deg, #FFE4E1, #FFF0F5, #FFB6C1);
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '✨';
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .hero::after {
+            content: '💖';
+            position: absolute;
+            top: 20%;
+            right: 15%;
+            font-size: 1.5rem;
+            animation: float 4s ease-in-out infinite reverse;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            color: #FF1493;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(255, 20, 147, 0.3);
+            animation: bounce 3s ease-in-out infinite;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            color: #C71585;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: linear-gradient(45deg, #FF69B4, #FF1493);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.4);
+            transition: all 0.3s ease;
+            animation: float 2s ease-in-out infinite;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(255, 20, 147, 0.6);
+        }
+        
+        /* Characters Section */
+        .characters {
+            padding: 4rem 2rem;
+            background: white;
+            position: relative;
+        }
+        
+        .characters h2 {
+            text-align: center;
+            font-size: 3rem;
+            color: #FF1493;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .characters h2::before {
+            content: '🎀';
+            position: absolute;
+            left: -3rem;
+            top: 0;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        .characters h2::after {
+            content: '🎀';
+            position: absolute;
+            right: -3rem;
+            top: 0;
+            animation: bounce 2s ease-in-out infinite reverse;
+        }
+        
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .character-card {
+            background: linear-gradient(135deg, #FFE4E1, #FFF0F5);
+            padding: 2rem;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .character-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 105, 180, 0.1), transparent);
+            animation: sparkle 4s ease-in-out infinite;
+        }
+        
+        .character-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(255, 182, 193, 0.5);
+        }
+        
+        .character-image {
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .character-image img {
+            border-radius: 15px;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1));
+            transition: all 0.3s ease;
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+        }
+        
+        .character-card:hover .character-image img {
+            transform: scale(1.1);
+            filter: drop-shadow(4px 6px 10px rgba(255, 105, 180, 0.3));
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        .character-card h3 {
+            font-size: 1.8rem;
+            color: #C71585;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .character-card p {
+            color: #8B0051;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Special Section */
+        .special-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #FF69B4, #FFB6C1, #FFC0CB, #FFE4E1);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .special-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-radial-gradient(
+                circle at center,
+                transparent 0px,
+                rgba(255, 255, 255, 0.1) 20px,
+                transparent 40px
+            );
+            animation: sparkle 8s linear infinite;
+        }
+        
+        .special-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .special-content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(255, 20, 147, 0.3);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .special-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 182, 193, 0.1), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        .special-section h2 {
+            font-size: 3.5rem;
+            color: #FF1493;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(255, 20, 147, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .heart-decoration {
+            font-size: 4rem;
+            animation: bounce 2s ease-in-out infinite;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .special-message {
+            font-size: 1.4rem;
+            color: #C71585;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .dedication {
+            font-size: 1.2rem;
+            color: #8B0051;
+            font-style: italic;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 182, 193, 0.2);
+            border-radius: 20px;
+            border-left: 5px solid #FF69B4;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .float-emoji {
+            position: absolute;
+            font-size: 2rem;
+            animation: floatAround 6s ease-in-out infinite;
+            opacity: 0.7;
+        }
+        
+        .float-emoji:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .float-emoji:nth-child(2) {
+            top: 20%;
+            right: 10%;
+            animation-delay: 1.5s;
+        }
+        
+        .float-emoji:nth-child(3) {
+            bottom: 20%;
+            left: 15%;
+            animation-delay: 3s;
+        }
+        
+        .float-emoji:nth-child(4) {
+            bottom: 10%;
+            right: 15%;
+            animation-delay: 4.5s;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+        
+        @keyframes floatAround {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(90deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+            75% { transform: translateY(-20px) rotate(270deg); }
+        }
+        .features {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #FFB6C1, #FFE4E1);
+        }
+        
+        .features h2 {
+            text-align: center;
+            font-size: 3rem;
+            color: #FF1493;
+            margin-bottom: 3rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .feature-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            padding: 4rem 2rem;
+            background: linear-gradient(45deg, #FF69B4, #FF1493);
+            text-align: center;
+            color: white;
+        }
+        
+        .newsletter h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .newsletter p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .newsletter button {
+            padding: 1rem 2rem;
+            background: white;
+            color: #FF1493;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            background: #2C2C2C;
+            color: white;
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #FFB6C1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #FF69B4;
+        }
+        
+        .social-icons {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .social-icons span {
+            margin: 0 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .social-icons span:hover {
+            transform: scale(1.2);
+            animation: bounce 1s ease-in-out;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .characters h2::before,
+            .characters h2::after {
+                display: none;
+            }
+        }
+        
+        /* Floating elements */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 1rem;
+            color: rgba(255, 105, 180, 0.6);
+            animation: floatUp 6s ease-in infinite;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts -->
+    <div class="floating-hearts" id="floating-hearts"></div>
+    
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">Hello Kitty 💖</div>
+            <ul class="nav-menu">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#personagens">Personagens</a></li>
+                <li><a href="#especial">Sobre o Site</a></li>
+                <li><a href="#produtos">Produtos</a></li>
+                <li><a href="#novidades">Novidades</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Bem-vindo ao Mundo Supercute! 🎀</h1>
+        <p>Descubra o universo mágico da Hello Kitty e seus amigos! Um mundo cheio de amor, amizade e muita fofura esperando por você!</p>
+        <a href="#personagens" class="cta-button">Conhecer os Personagens ✨</a>
+    </section>
+    
+    <!-- Special Section -->
+    <section class="special-section" id="especial">
+        <div class="special-container">
+            <div class="special-content">
+                <h2>Feito Especialmente Para Você! 💕</h2>
+                <div class="heart-decoration">💖</div>
+                <p class="special-message">
+                    Você perguntou se tinha um site da Hello Kitty no Github, bom agora tem 
+                </p>
+                <p class="special-message">
+                    E você é esse motivo especial! ✨
+                </p>
+                <p class="dedication">
+                    Vai se fuder candanga!
+                </p>
+                <div class="floating-elements">
+                    <span class="float-emoji">🎀</span>
+                    <span class="float-emoji">✨</span>
+                    <span class="float-emoji">💫</span>
+                    <span class="float-emoji">🌸</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Characters Section -->
+    <section class="characters" id="personagens">
+        <h2>Nossos Personagens Favoritos</h2>
+        <div class="character-grid">
+            <div class="character-card">
+                <div class="character-image">
+                    <img src="imagens/hellokitty.webp" alt="Hello Kitty" width="120" height="120">
+                </div>
+                <h3>Hello Kitty</h3>
+                <p>A garota mais fofa do mundo! Hello Kitty é alegre, divertida e adora fazer novos amigos. Seu lema é: "Muitos amigos nunca são demais!"</p>
+            </div>
+            <div class="character-card">
+                <div class="character-image">
+                    <img src="imagens/mymelody.webp" alt="My Melody" width="120" height="120">
+                </div>
+                <h3>My Melody</h3>
+                <p>Uma coelhinha super doce que adora bolos e biscoitos. Ela é a melhor amiga que você pode ter, sempre gentil e carinhosa!</p>
+            </div>
+            <div class="character-card">
+                <div class="character-image">
+                    <img src="imagens/sapo.webp" alt="Keroppi" width="120" height="120">
+                </div>
+                <h3>Keroppi</h3>
+                <p>O sapinho mais animado de todos! Keroppi adora nadar e cantar, e sempre está pronto para uma nova aventura com os amigos.</p>
+            </div>
+            <div class="character-card">
+                <div class="character-image">
+                    <img src="imagens/penguin.webp" alt="Badtz-Maru" width="120" height="120">
+                </div>
+                <h3>Badtz-Maru</h3>
+                <p>O pinguim rebelde com coração de ouro! Badtz-Maru pode parecer malvado, mas na verdade é super divertido e leal aos amigos.</p>
+            </div>
+            <div class="character-card">
+                <div class="character-image">
+                    <img src="imagens/crianças.webp" alt="Little Twin Stars" width="120" height="120">
+                </div>
+                <h3>Little Twin Stars</h3>
+                <p>Kiki e Lala, os gêmeos mais mágicos do universo! Eles vieram das estrelas para espalhar sonhos e alegria por todo lugar.</p>
+            </div>
+            <div class="character-card">
+                <div class="character-image">
+                    <img src="imagens/kuromi.webp" alt="Kuromi" width="120" height="120">
+                </div>
+                <h3>Kuromi</h3>
+                <p>A coelhinha rebelde com um coração doce! Kuromi pode parecer travessa, mas é uma amiga incrível e cheia de personalidade.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features">
+        <h2>Por que amamos a Hello Kitty? 💕</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">🎨</div>
+                <h3>Design Kawaii</h3>
+                <p>Designs super fofos que derretem o coração e trazem alegria para o dia a dia!</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">👫</div>
+                <h3>Amizade</h3>
+                <p>Valores de amizade, carinho e bondade que inspiram pessoas do mundo todo!</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🌈</div>
+                <h3>Cores Vibrantes</h3>
+                <p>Um mundo cheio de cores pastéis e tons suaves que acalmam a alma!</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">✨</div>
+                <h3>Magia Pura</h3>
+                <p>Cada produto carrega um pouco da magia e encanto do universo Sanrio!</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <h2>Fique por dentro das novidades! 📧</h2>
+        <p>Receba em primeira mão todas as novidades do mundo Hello Kitty!</p>
+        <form class="newsletter-form">
+            <input type="email" placeholder="Digite seu e-mail aqui..." required>
+            <button type="submit">Inscrever-se 💌</button>
+        </form>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#sobre">Sobre a Sanrio</a>
+                <a href="#privacidade">Política de Privacidade</a>
+                <a href="#termos">Termos de Uso</a>
+                <a href="#contato">Contato</a>
+                <a href="#loja">Loja Oficial</a>
+            </div>
+            <div class="social-icons">
+                <span>💖</span>
+                <span>🎀</span>
+                <span>✨</span>
+                <span>🌸</span>
+                <span>🎪</span>
+            </div>
+            <p>&copy; 2024 Hello Kitty Brasil - Todos os direitos reservados. Feito com muito 💖 para impressionar alguém especial!</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Floating hearts animation
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = Math.random() > 0.5 ? '💖' : '✨';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            document.getElementById('floating-hearts').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+        
+        // Create hearts periodically
+        setInterval(createHeart, 1000);
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Newsletter form
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input').value;
+            if (email) {
+                alert('💖 Obrigada por se inscrever! Você receberá muitas novidades fofas no seu email! ✨');
+                this.querySelector('input').value = '';
+            }
+        });
+        
+        // Add bounce effect to character cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'bounce 1s ease-in-out';
+                    setTimeout(() => {
+                        entry.target.style.animation = '';
+                    }, 1000);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.character-card').forEach(card => {
+            observer.observe(card);
+        });
+        
+        // Add sparkle effects on hover
+        document.querySelectorAll('.character-card, .feature-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 20px 50px rgba(255, 182, 193, 0.6), 0 0 30px rgba(255, 105, 180, 0.4)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '';
+            });
+        });
+        
+        // Random sparkle effect
+        function addSparkles() {
+            const sparkles = ['✨', '💫', '⭐', '🌟', '💖'];
+            const randomSparkle = sparkles[Math.floor(Math.random() * sparkles.length)];
+            
+            const sparkleEl = document.createElement('div');
+            sparkleEl.innerHTML = randomSparkle;
+            sparkleEl.style.position = 'fixed';
+            sparkleEl.style.left = Math.random() * window.innerWidth + 'px';
+            sparkleEl.style.top = Math.random() * window.innerHeight + 'px';
+            sparkleEl.style.fontSize = '1.5rem';
+            sparkleEl.style.pointerEvents = 'none';
+            sparkleEl.style.zIndex = '999';
+            sparkleEl.style.animation = 'sparkle 2s ease-out forwards';
+            
+            document.body.appendChild(sparkleEl);
+            
+            setTimeout(() => {
+                sparkleEl.remove();
+            }, 2000);
+        }
+        
+        // Create sparkles occasionally
+        setInterval(addSparkles, 3000);
+        
+        // Add special section animations on scroll
+        const specialSection = document.querySelector('.special-section');
+        if (specialSection) {
+            observer.observe(specialSection);
+        }
+        
+        // Special heart animation for the special section
+        function createSpecialHearts() {
+            const section = document.querySelector('.special-content');
+            if (!section) return;
+            
+            const heart = document.createElement('div');
+            heart.innerHTML = '💖';
+            heart.style.position = 'absolute';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.top = '100%';
+            heart.style.fontSize = '1.5rem';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '1';
+            heart.style.animation = 'floatUp 4s ease-out forwards';
+            
+            section.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+        
+        // Create special hearts when in special section
+        let specialInterval;
+        const specialObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    specialInterval = setInterval(createSpecialHearts, 800);
+                } else {
+                    clearInterval(specialInterval);
+                }
+            });
+        });
+        
+        if (document.querySelector('.special-section')) {
+            specialObserver.observe(document.querySelector('.special-section'));
+        }
+    </script>
+</body>
+</html>
